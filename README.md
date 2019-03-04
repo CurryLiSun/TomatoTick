@@ -1,3 +1,5 @@
+這是一個倒數計時器，可供使用者輸入任意秒數開始倒數
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
