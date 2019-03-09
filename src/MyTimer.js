@@ -7,21 +7,21 @@ class MyTimer extends Component {
         super(props);
         this.state = {
             value: 0,
-            date: new Date()
+            date: new Date(),
+            isStartCount: false
         };
-        // 指定this
-        this.tick = this.tick.bind(this);
-    
+
+        //使用bind讓render區域可呼叫到內部function
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.activateTimer = this.activateTimer.bind(this);
         this.resetTimer = this.resetTimer.bind(this);
     }
-
+    //----網路參考
     componentDidMount() {
         console.log("componentDidMount");
         this.timerID = setInterval(
-            ()=>this.tick(),
+            ()=>this.clockTick(),
             1000
         );
     }
@@ -31,14 +31,12 @@ class MyTimer extends Component {
         clearInterval(this.timerID);
     }
 
-    tick() {
-        let temp = this.state.value-1;
+    clockTick() {
         this.setState({
-            date: new Date(),
-            value:temp
+            date: new Date()
         });
     }
-
+    //----
     handleChange(event) {
         this.setState({value: event.target.value});
     }
@@ -51,14 +49,39 @@ class MyTimer extends Component {
     activateTimer(event){
         //預想是將輸入數值更新至state的value
         //this.setState({value: event.target.value});
+        //倒數計時
+        this.countTimerID = setInterval(
+            ()=>this.countdownTick(),
+            1000
+        );
+        this.setState({
+            isStartCount: true
+        });
         console.log(this);
-        console.log(this.setInterval);
-        //this.setInterval = setInterval(this.value.bind(this),1000)
+        //設定布林直開始倒數
     }
 
     resetTimer(event){
         //console.log(event);
-        this.setState({value: 0});
+        //停止倒數
+        clearInterval(this.countTimerID);
+        this.setState({
+            value: 0,
+            isStartCount: false
+        });
+    }
+
+    countdownTick() {
+        let temp = this.state.value-1;
+        this.setState({
+            value:temp
+        });
+        if (this.state.value <= 0) {
+            clearInterval(this.countTimerID);
+            this.setState({
+                value:0
+            });
+        }
     }
 
     render() {
