@@ -49,14 +49,14 @@ class MyTimer extends Component {
     activateTimer(event){
         //預想是將輸入數值更新至state的value
         //this.setState({value: event.target.value});
+        this.setState({
+            isStartCount: true
+        });
         //倒數計時
         this.countTimerID = setInterval(
             ()=>this.countdownTick(),
             1000
         );
-        this.setState({
-            isStartCount: true
-        });
         console.log(this);
         //設定布林直開始倒數
     }
@@ -79,7 +79,8 @@ class MyTimer extends Component {
         if (this.state.value <= 0) {
             clearInterval(this.countTimerID);
             this.setState({
-                value:0
+                value:0,
+                isStartCount: false
             });
         }
     }
@@ -92,7 +93,7 @@ class MyTimer extends Component {
             <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
             <label>{this.state.value}</label>
             <br></br>
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <input type="text" value={this.state.value} onChange={this.handleChange} disabled={this.state.isStartCount} />
             <br></br>
             <button onClick={this.activateTimer}>
                 開始
