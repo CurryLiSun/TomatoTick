@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './MyTimer.css';
+import CountDownTick from './CountDownTick';
 
 class MyTimer extends Component {
     
@@ -16,6 +17,8 @@ class MyTimer extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.activateTimer = this.activateTimer.bind(this);
         this.resetTimer = this.resetTimer.bind(this);
+        // create a ref to store the textInput DOM element
+        this.countDown_input = React.createRef();
     }
     //----網路參考
     componentDidMount() {
@@ -36,6 +39,10 @@ class MyTimer extends Component {
             date: new Date()
         });
     }
+    //新增一個submit的function
+    submitForm(event){
+        
+    }
     //----
     handleChange(event) {
         this.setState({value: event.target.value});
@@ -49,6 +56,9 @@ class MyTimer extends Component {
     activateTimer(event){
         //預想是將輸入數值更新至state的value
         //this.setState({value: event.target.value});
+        console.log(event);
+        
+        //設定布林開始倒數
         this.setState({
             isStartCount: true
         });
@@ -57,8 +67,7 @@ class MyTimer extends Component {
             ()=>this.countdownTick(),
             1000
         );
-        console.log(this);
-        //設定布林直開始倒數
+        
     }
 
     resetTimer(event){
@@ -69,6 +78,9 @@ class MyTimer extends Component {
             value: 0,
             isStartCount: false
         });
+        // Explicitly focus the text input using the raw DOM API
+        // Note: we're accessing "current" to get the DOM node
+        this.countDown_input.current.value = 0;
     }
 
     countdownTick() {
@@ -91,9 +103,12 @@ class MyTimer extends Component {
             <h1>My Timer</h1>
             <h1>Hello, world!</h1>
             <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-            <label>{this.state.value}</label>
-            <br></br>
-            <input type="text" value={this.state.value} onChange={this.handleChange} disabled={this.state.isStartCount} />
+            {/* <label>{this.state.value}</label> */}
+            <CountDownTick 
+            countDown_value={this.state.value}
+            isStartCount={this.state.isStartCount}
+            />
+            <input type="text" onChange={this.handleChange} disabled={this.state.isStartCount} ref={this.countDown_input} />
             <br></br>
             <button onClick={this.activateTimer}>
                 開始
