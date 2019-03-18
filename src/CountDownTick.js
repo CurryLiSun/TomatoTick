@@ -12,7 +12,7 @@ class CountDownTick extends Component {
     }
     //完成組件時，設定倒數計時timer
     componentDidMount() {
-        console.log("componentDidMount");
+        //console.log("componentDidMount");
         if (this.state.isStartCount) {
             this.countTimerID = setInterval(
                 ()=>this.countdownTick(),
@@ -31,11 +31,12 @@ class CountDownTick extends Component {
         if (this.state.value <= 0) {
             //秒數為零，觸發父組件的重置function
             this.props.unmountMe();
+            this.props.noticeTimesUp();
         }
     }
     //每秒執行的function
     countdownTick() {
-        console.log("counting!!");
+        //console.log("counting!!");
         let temp = this.state.value-1;
         this.setState({
             value:temp

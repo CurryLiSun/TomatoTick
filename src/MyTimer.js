@@ -8,7 +8,8 @@ class MyTimer extends Component {
         this.state = {
             value: 0,
             date: new Date(),
-            isStartCount: false
+            isStartCount: false,
+            isTimesUp: false
         };
 
         //使用bind讓render區域可呼叫到內部function
@@ -18,10 +19,12 @@ class MyTimer extends Component {
         this.resetTimer = this.resetTimer.bind(this);
         // create a ref to store the textInput DOM element
         this.countDown_input = React.createRef();
+        this.audio_noticeVoice = React.createRef();
     }
     //----網路參考
     componentDidMount() {
         //console.log("componentDidMount");
+        //console.log("father component","componentDidMount");
         this.timerID = setInterval(
             ()=>this.clockTick(),
             1000
@@ -46,6 +49,7 @@ class MyTimer extends Component {
                 countDown_value={this.state.value}
                 isStartCount={this.state.isStartCount}
                 unmountMe={this.resetTimer}
+                noticeTimesUp={this.noticeVoice}
                 />
     } 
 
@@ -57,6 +61,38 @@ class MyTimer extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+    }
+
+    componentDidUpdate(){
+        //setState設定完數值之後，會在此方法內更新組件數值
+        // console.log("father component","componentDidUpdate");
+        // console.log("father component",this.state.isTimesUp);
+
+        if (this.state.isTimesUp) {
+            this.audio_noticeVoice.current.play();
+        }else{
+            this.audio_noticeVoice.current.pause();
+            this.audio_noticeVoice.current.currentTime = 0;
+        }
+    }
+
+    noticeVoice = (event) => {
+        //https://www.soundjay.com/phone/telephone-ring-03a.wav
+        // Explicitly focus the text input using the raw DOM API
+        // Note: we're accessing "current" to get the DOM node
+        this.setState({
+            isTimesUp: !this.state.isTimesUp
+        });
+        //setState方法不會立即更新組件數值
+        //以下這樣不會觸發條件
+        /*
+        if (this.state.isTimesUp) {
+            this.audio_noticeVoice.current.play();
+        }else{
+            this.audio_noticeVoice.current.pause();
+            this.audio_noticeVoice.current.currentTime = 0;
+        }
+        */
     }
 
     activateTimer(event){
@@ -78,7 +114,7 @@ class MyTimer extends Component {
         });
         // Explicitly focus the text input using the raw DOM API
         // Note: we're accessing "current" to get the DOM node
-        this.countDown_input.current.value = 0;
+        //this.countDown_input.current.value = 0;
     }
 
     render() {
@@ -89,13 +125,19 @@ class MyTimer extends Component {
             {/* 倒數時顯示組件 */}
             <h1>{this.state.isStartCount && this.renderCountDownTick()}</h1>
             {/* 當數值變動時，觸發handleChange;disabled用於倒數計時中不可修改input;ref用於倒數計時結束，重新歸零 */}
-            <input type="text" onChange={this.handleChange} disabled={this.state.isStartCount} ref={this.countDown_input} />
+            <input type="text" value={this.state.value} onChange={this.handleChange} disabled={this.state.isStartCount} ref={this.countDown_input} />
+            {/* 提醒鈴聲 */}
+            <audio src="https://www.soundjay.com/phone/telephone-ring-03a.wav" loop={true} autoPlay={false} ref={this.audio_noticeVoice} ></audio>
+            
             <br></br>
             <button onClick={this.activateTimer}>
                 開始
             </button>
             <button onClick={this.resetTimer}>
                 重置
+            </button>
+            <button onClick={this.noticeVoice} disabled={!this.state.isTimesUp}>
+                停止鬧鈴
             </button>
             
         </div>
