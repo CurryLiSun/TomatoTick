@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './MyTimer.css';
 import CountDownTick from './CountDownTick';
+import Button from 'react-bootstrap/Button';
+import { Container,Row,Col } from 'react-bootstrap';
 
 class MyTimer extends Component {
     constructor(props) {
@@ -120,26 +122,44 @@ class MyTimer extends Component {
     render() {
         return (
         <div className="MyTimer">
-            <h3>It is {this.state.date.toLocaleTimeString()}.</h3>
-            <h2>My Timer Hello, world!</h2>
-            {/* 倒數時顯示組件 */}
-            <h1>{this.state.isStartCount && this.renderCountDownTick()}</h1>
-            {/* 當數值變動時，觸發handleChange;disabled用於倒數計時中不可修改input;ref用於倒數計時結束，重新歸零 */}
-            <input type="text" value={this.state.value} onChange={this.handleChange} disabled={this.state.isStartCount} ref={this.countDown_input} />
-            {/* 提醒鈴聲 */}
-            <audio src="https://www.soundjay.com/phone/telephone-ring-03a.wav" loop={true} autoPlay={false} ref={this.audio_noticeVoice} ></audio>
+        <Container>
+        <Row className="justify-content-md-center">
+            <Col md="auto"><h3>It is {this.state.date.toLocaleTimeString()}.</h3></Col>
+            <Col md="auto"><h2>My Timer Hello, world!</h2></Col>
+        </Row>
+        <Row>
+            <Col>
+                {/* 倒數時顯示組件 */}
+                <h1>{this.state.isStartCount && this.renderCountDownTick()}</h1>
+            </Col>
             
-            <br></br>
-            <button onClick={this.activateTimer}>
-                開始
-            </button>
-            <button onClick={this.resetTimer}>
-                重置
-            </button>
-            <button onClick={this.noticeVoice} disabled={!this.state.isTimesUp}>
-                停止鬧鈴
-            </button>
-            
+        </Row>
+        <Row>
+            <Col>
+                {/* 當數值變動時，觸發handleChange;disabled用於倒數計時中不可修改input;ref用於倒數計時結束，重新歸零 */}
+                <input type="text" value={this.state.value} onChange={this.handleChange} disabled={this.state.isStartCount} ref={this.countDown_input} />
+                {/* 提醒鈴聲 */}
+                <audio src="https://www.soundjay.com/phone/telephone-ring-03a.wav" loop={true} autoPlay={false} ref={this.audio_noticeVoice} ></audio>
+            </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+            <Col md="auto">
+                <Button variant="primary" onClick={this.activateTimer}>
+                    開始
+                </Button>
+            </Col>
+            <Col md="auto">
+                <Button variant="warning" onClick={this.resetTimer}>
+                    重置
+                </Button>
+            </Col>
+            <Col md="auto">
+                <Button variant="info" onClick={this.noticeVoice} disabled={!this.state.isTimesUp}>
+                    停止鬧鈴
+                </Button>
+            </Col>
+        </Row>
+        </Container>
         </div>
         );
     }
