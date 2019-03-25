@@ -124,15 +124,14 @@ class MyTimer extends Component {
         <div className="MyTimer">
         <Container>
         <Row className="justify-content-md-center">
-            <Col md="auto"><h3>It is {this.state.date.toLocaleTimeString()}.</h3></Col>
-            <Col md="auto"><h2>My Timer Hello, world!</h2></Col>
+            <Col md="auto"><h5>It is {this.state.date.toLocaleTimeString()}.</h5></Col>
+            <Col md="auto"><h5>My Timer Hello, world!</h5></Col>
         </Row>
         <Row>
             <Col>
                 {/* 倒數時顯示組件 */}
-                <h1>{this.state.isStartCount && this.renderCountDownTick()}</h1>
+                <h3>{this.state.isStartCount && this.renderCountDownTick()}</h3>
             </Col>
-            
         </Row>
         <Row>
             <Col>
