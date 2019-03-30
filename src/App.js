@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+//import './App.css';
 import MyTimer from './MyTimer';
 import MyNavBar from './MyNavBar';
+//import './css/resume.css';
 
 class App extends Component {
   render() {
