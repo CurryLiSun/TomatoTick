@@ -3,6 +3,7 @@ import logo from './logo.svg';
 //import './App.css';
 import MyTimer from './MyTimer';
 import MyNavBar from './MyNavBar';
+import MyContent from './MyContent';
 //import './css/resume.css';
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
           </a>
         </header> */}
         <MyNavBar></MyNavBar>
+        <MyContent></MyContent>
         <MyTimer></MyTimer>
       </div>
     );
