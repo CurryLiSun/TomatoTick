@@ -24,7 +24,7 @@ class App extends Component {
             Learn React
           </a>
         </header> */}
-        <MyNavBar></MyNavBar>
+        {/* <MyNavBar></MyNavBar> */}
         <MyContent></MyContent>
         <MyTimer></MyTimer>
       </div>

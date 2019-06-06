@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// ES6 Imports
+import * as Scroll from 'react-scroll';
+import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 //import 'bootstrap/dist/css/bootstrap.css';
 //import './css/resume.css';
 
@@ -6,6 +9,74 @@ class MyContent extends Component {
     render() {
         return (
         <div>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+                <a className="navbar-brand js-scroll-trigger" href="#page-top">
+                    <span className="d-block d-lg-none">Curry Sun</span>
+                    <span className="d-none d-lg-block">
+                        <img className="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt=""></img>
+                    </span>
+                </a>
+
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            {/* <a className="nav-link js-scroll-trigger" href="#about">About</a> */}
+                            <Link className="nav-link js-scroll-trigger" activeClass="active" to="about"
+                                spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
+                                About
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            {/* <a className="nav-link js-scroll-trigger" href="#experience">Experience</a> */}
+                            <Link className="nav-link js-scroll-trigger" activeClass="active" to="experience"
+                                spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
+                                Experience
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            {/* <a className="nav-link js-scroll-trigger" href="#education">Education</a> */}
+                            <Link className="nav-link js-scroll-trigger" activeClass="active" to="education"
+                                spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
+                                Education
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            {/* <a className="nav-link js-scroll-trigger" href="#skills">Skills</a> */}
+                            <Link className="nav-link js-scroll-trigger" activeClass="active" to="skills"
+                                spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
+                                Skills
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            {/* <a className="nav-link js-scroll-trigger" href="#interests">Interests</a> */}
+                            <Link className="nav-link js-scroll-trigger" activeClass="active" to="interests"
+                                spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
+                                Interests
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            {/* <a className="nav-link js-scroll-trigger" href="#awards">Awards</a> */}
+                            <Link className="nav-link js-scroll-trigger" activeClass="active" to="awards"
+                                spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
+                                Awards
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            {/* <a className="nav-link js-scroll-trigger" href="#features">Features</a> */}
+                            <Link className="nav-link js-scroll-trigger" activeClass="active" to="features"
+                                spy={true} smooth={true} offset={50} duration={500} onSetActive={this.handleSetActive}>
+                                Features
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+                
+            </nav>
+
             <div class="container-fluid p-0">
                 <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
                     <div class="w-100">

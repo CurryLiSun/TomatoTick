@@ -122,6 +122,9 @@ class MyTimer extends Component {
     render() {
         return (
         <div className="MyTimer">
+
+        <hr class="m-0"></hr>
+        
         <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="features">
             <Container>
             <Row className="justify-content-md-center">
